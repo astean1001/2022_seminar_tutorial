@@ -11,7 +11,7 @@ contract MalToken is IERC20 {
     string public symbol = "HACK";
     uint8 public decimals = 18;
 
-    constructor(string memory _name, string memory _symbol) ERC20() {
+    constructor(string memory _name, string memory _symbol) {
         name = _name;
         symbol = _symbol;
     }
