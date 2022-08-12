@@ -58,7 +58,7 @@ contract Treasury is Ownable{
 		//safeTransfer(_baseToken, _to, _amount);
 	}
 
-	function safeTransfer(address token, address to, uint256 amount) public {
+	function safeTransfer(address token, address to, uint256 amount) private {
 		(bool success, bytes memory data) = token.call(
             abi.encodeWithSignature("transfer(address,uint256)", to, amount)
         );

@@ -35,7 +35,7 @@ contract Strategy {
 		require(ctoken.mint(amount) == 0, "Strategy: Mint failed"); 
 	}
 
-	function safeApprove(address token, address to, uint256 amount) public {
+	function safeApprove(address token, address to, uint256 amount) private {
 		(bool success, bytes memory data) = token.call(
             abi.encodeWithSignature("approve(address,uint256)", to, amount)
         );
