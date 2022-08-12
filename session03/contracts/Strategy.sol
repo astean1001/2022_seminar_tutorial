@@ -30,8 +30,8 @@ contract Strategy {
 	}
 
 	function execute(uint256 amount) public payable {
-		// IERC20(baseToken).approve(address(ctoken), amount); 
-		safeApprove(baseToken, address(ctoken), amount);
+		IERC20(baseToken).approve(address(ctoken), amount); 
+		//safeApprove(baseToken, address(ctoken), amount);
 		require(ctoken.mint(amount) == 0, "Strategy: Mint failed"); 
 	}
 

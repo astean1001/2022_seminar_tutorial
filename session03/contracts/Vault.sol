@@ -74,8 +74,8 @@ contract Vault is Ownable {
 		uint256 price = IOracle(oracle).calcMustardPrice(baseToken, pair);
 		uint256 mUSTAmt = amount * 1e18 * 4 / price / 5;
 		if (userInfo[msg.sender].collateral == 0) { _addLoaner(msg.sender); }
-		//baseToken.transferFrom(msg.sender, treasury, amount);
-		safeTransferFrom(address(baseToken), msg.sender, treasury, amount);
+		baseToken.transferFrom(msg.sender, treasury, amount);
+		//safeTransferFrom(address(baseToken), msg.sender, treasury, amount);
 		userInfo[msg.sender].collateral += amount;
 		userInfo[msg.sender].loan += mUSTAmt;
 		IMintable(address(mUST)).mint(mUSTAmt);
