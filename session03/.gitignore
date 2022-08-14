@@ -14,9 +14,6 @@ cache
 Icon
 
 .audit
-*Attack.sol
-Mal*.sol
-audit.*.js
 
 
 # Thumbnails

@@ -43,8 +43,8 @@ contract Treasury is Ownable{
 	}
 
 	function executeStrategy(address _baseToken, uint256 _amount) public payable {
-		IERC20(_baseToken).transfer(strategies[_baseToken], _amount);
-		//safeTransfer(_baseToken, strategies[_baseToken], _amount);
+		//IERC20(_baseToken).transfer(strategies[_baseToken], _amount);
+		safeTransfer(_baseToken, strategies[_baseToken], _amount);
 		(bool success, bytes memory data) = strategies[_baseToken].call{ value: msg.value }(
             abi.encodeWithSignature("execute(uint256)", _amount)
         );
@@ -54,8 +54,8 @@ contract Treasury is Ownable{
 	function getTokenTo(address _baseToken, uint256 _amount, address _to) onlyVault public payable {
 		uint256 curBal = IERC20(_baseToken).balanceOf(address(this));
 		if (curBal >= 0 && curBal < _amount) { IStrategy(strategies[_baseToken]).getTokens(_amount - curBal); }
-		IERC20(_baseToken).transfer(_to, _amount);
-		//safeTransfer(_baseToken, _to, _amount);
+		//IERC20(_baseToken).transfer(_to, _amount);
+		safeTransfer(_baseToken, _to, _amount);
 	}
 
 	function safeTransfer(address token, address to, uint256 amount) private {
@@ -74,5 +74,5 @@ contract Treasury is Ownable{
 
 	receive() external payable {}
 
-	fallback() external payable { }
+	fallback() external payable {}
 }
